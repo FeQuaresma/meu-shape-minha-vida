@@ -11,12 +11,14 @@ export default function Signup() {
 
   const signUp = () => {
     createUserWithEmailAndPassword(auth, email, password);
-    signIn("credentials", {
-      email,
-      password,
-      redirect: true,
-      callbackUrl: "/",
-    });
+    setTimeout(() => {
+      signIn("credentials", {
+        email,
+        password,
+        redirect: true,
+        callbackUrl: "/",
+      });
+    }, 1000);
   };
 
   return (
