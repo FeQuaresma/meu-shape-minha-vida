@@ -7,11 +7,19 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const flapJack = () =>
+    signIn("credentials", {
+      email,
+      password,
+      redirect: true,
+      callbackUrl: "/",
+    });
+
   return (
     <main className="flex w-full h-full justify-center items-center content-center">
       <div className="bg-white p-5 rounded-lg">
         <h1>Meu Shape Minha Vida</h1>
-        <div>
+        <form onSubmit={(e) => e.preventDefault()}>
           <p>Email:</p>
           <input
             id="email"
@@ -21,8 +29,6 @@ export default function SignIn() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div>
           <p>Senha:</p>
           <input
             id="password"
@@ -32,7 +38,24 @@ export default function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
+          <div />
+          <button
+            value="Entrar"
+            type="submit"
+            className="bg-slate-800 p-2 rounded-lg text-white"
+            onClick={() =>
+              signIn("credentials", {
+                email,
+                password,
+                redirect: true,
+                callbackUrl: "/",
+              })
+            }
+            disabled={!email || !password}
+          >
+            Entrar
+          </button>
+        </form>
         <div>
           <button
             className="text-left w-full"
@@ -41,20 +64,6 @@ export default function SignIn() {
             Esqueci minha senha
           </button>
         </div>
-        <button
-          className="bg-slate-800 p-2 rounded-lg text-white"
-          onClick={() =>
-            signIn("credentials", {
-              email,
-              password,
-              redirect: true,
-              callbackUrl: "/",
-            })
-          }
-          disabled={!email || !password}
-        >
-          Entrar
-        </button>
         <div />
         <button onClick={() => router.push("signup")}>Cadastrar</button>
       </div>
